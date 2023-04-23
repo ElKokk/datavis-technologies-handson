@@ -6,16 +6,19 @@
     const innerHeight = height - margin.top - margin.bottom;
   </script>
   
-  <svg {width} {height}>
-    <g transform="translate({margin.left}, {margin.top})">
-      <circle cx={innerWidth / 2} cy={innerHeight / 2} r="20" fill="teal" />
-    </g>
-  </svg>
+  <svg viewBox="0 0 100 100">
+  <g transform="translate({margin.left}, {margin.top})">
+    <circle cx={innerWidth / 2 + 20} cy={innerHeight / 2 + 20}
+     r="20" fill="teal" />
+  </g>
+</svg>
   
   <style>
-    svg {
-      border: 1px solid black;
-      border-radius: 5px;
-    }
-  </style>
+  svg {
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 100px;
+    height: 100px;
+  }
+</style>
   
