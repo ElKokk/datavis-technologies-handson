@@ -4,8 +4,9 @@
   import { select } from "d3-selection";
   import { schemeCategory10 } from "d3-scale-chromatic";
   import { onMount } from "svelte";
+  import { max } from "d3-array";
 
-  export let data;
+  export let countriesFor1800;
 
   const [height, width] = [400, 600];
   const margin = { top: 50, right: 5, bottom: 55, left: 50 };
@@ -13,19 +14,19 @@
   const innerHeight = height - margin.top - margin.bottom;
 
   const xScale = scaleLinear()
-    .domain([0, d3.max(data, (d) => +d.income)])
+    .domain([0, max(countriesFor1800, (d) => +d.income)])
     .range([0, innerWidth]);
 
   const yScale = scaleLinear()
-    .domain([0, d3.max(data, (d) => +d.life_exp)])
+    .domain([0, max(countriesFor1800, (d) => +d.life_exp)])
     .range([innerHeight, 0]);
 
   const rScale = scaleSqrt()
-    .domain([0, d3.max(data, (d) => +d.population)])
+    .domain([0, max(countriesFor1800, (d) => +d.population)])
     .range([0, 25]);
 
   const colorScale = scaleOrdinal(schemeCategory10)
-    .domain([...new Set(data.map((d) => d.continent))]);
+    .domain([...new Set(countriesFor1800.map((d) => d.continent))]);
 
   const xAxis = axisBottom(xScale);
   const yAxis = axisLeft(yScale);
@@ -46,7 +47,7 @@
     <g id="x-axis" transform="translate(0, {innerHeight})"></g>
     <g id="y-axis"></g>
 
-    {#each data as d}
+    {#each countriesFor1800 as d}
       <circle
         cx="{xScale(+d.income)}"
         cy="{yScale(+d.life_exp)}"
@@ -63,4 +64,3 @@
     <text x="{innerWidth - margin.right}" y="{innerHeight - margin.bottom / 2}" text-anchor="end" font-size="14">{yearLabel}</text>
   </g>
 </svg>
-  
