@@ -9,7 +9,6 @@
   const response = await fetch("/data/gapminder.json");
   data = await response.json();
   countriesFor1800 = data.find((entry) => entry.year === '1800').countries;
-  console.log("countriesFor1800:", countriesFor1800); // Add this line
 });
 </script>
 
